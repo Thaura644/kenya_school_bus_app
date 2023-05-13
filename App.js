@@ -4,12 +4,27 @@ import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
 // import { Stack, useRouter } from 'expo-router';
 import LoginScreen from './components/LoginScreen';
 import Dashboard from './components/Dashboard';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
 
+
+// const Stack = createStackNavigator();
 
 export default function App() {
   return (
+    
+
     <View style={styles.container}>
-      <LoginScreen/>
+    
+      {/* <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="LoginScreen" component={LoginScreen}/>
+          <Stack.Screen name="Dashboard" components={Dashboard}/>
+        </Stack.Navigator>
+      </NavigationContainer> */}
+
+    
+      {/* <LoginScreen/> */}
       <Dashboard/>
 
   

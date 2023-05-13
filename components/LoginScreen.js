@@ -1,3 +1,4 @@
+import { StackActions } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
@@ -9,10 +10,20 @@ const LoginScreen = () => {
 
   const handleLogin = () => {
     // Implement login logic here
+    navigation.dispatch(
+      StackActions.replace('LoginScreen',{
+        user: 'jane',
+      })
+    );
   };
 
   const handleSignup = () => {
     // Implement signup logic here
+    navigation.dispatch(
+      StackActions.replace('LoginScreen',{
+        user: 'jane',
+      })
+    );
   };
 
   return (

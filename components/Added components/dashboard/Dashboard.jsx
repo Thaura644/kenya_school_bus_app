@@ -1,17 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-
 
 const Dashboard = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        {/* <Text style={styles.title}>Dashboard</Text> */}
-        <Image source = {require('./assets/logo1.png')}
-        style={{ width: 200, height: 30, marginRight: 50, marginTop: 40}}
-        />
+        <Text style={styles.title}>Dashboard</Text>
         <TouchableOpacity style={styles.button}>
           <Icon name="cog" size={24} color="#ffffff" />
         </TouchableOpacity>
@@ -41,8 +36,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   header: {
     flexDirection: 'row',

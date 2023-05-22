@@ -4,9 +4,10 @@ import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
 // import { Stack, useRouter } from 'expo-router';
 import LoginScreen from './components/LoginScreen';
 import Dashboard from './components/Dashboard';
+import LandingPage from './components/LandingPage';
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createStackNavigator } from '@react-navigation/stack';
-
+import Navigator from './routes/homeStack';
 
 // const Stack = createStackNavigator();
 
@@ -15,6 +16,7 @@ export default function App() {
     
 
     <View style={styles.container}>
+      
     
       {/* <NavigationContainer>
         <Stack.Navigator>
@@ -26,6 +28,8 @@ export default function App() {
     
       {/* <LoginScreen/> */}
       <Dashboard/>
+      {/* <Navigator/> */}
+      {/* <LandingPage/> */}
 
   
 

@@ -1,21 +1,26 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
+import DashboardCard from "../components/DasboardCards";
 
-
-
-const Dashboard = () => {
+export default function Dashboard() {
+  const mainCards = [
+    { image: "../../assets/bus.jpg", name: "", description: "" },
+    { image: "../../assets/bus.jpg", name: "", description: "" },
+    { image: "../../assets/bus.jpg", name: "", description: "" },
+  ];
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        {/* <Text style={styles.title}>Dashboard</Text> */}
-        <Image source = {require('./assets/logo1.png')}
-        style={{ width: 200, height: 30, marginRight: 50, marginTop: 40}}
-        />
         <TouchableOpacity style={styles.button}>
           <Icon name="cog" size={24} color="#ffffff" />
         </TouchableOpacity>
       </View>
+      {mainCards.map((card) => (
+        <DashboardCard
+          data={[{ image: "../../assets/bus.jpg", name: "", description: "" }]}
+        />
+      ))}
       <View style={styles.cardContainer}>
         <View style={styles.card}>
           <Icon name="users" size={48} color="#333333" />
@@ -35,47 +40,47 @@ const Dashboard = () => {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#ffffff",
+    alignItems: "center",
+    justifyContent: "center",
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: 16,
     paddingTop: 16,
     paddingBottom: 8,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333333',
+    fontWeight: "bold",
+    color: "#333333",
   },
   button: {
-    backgroundColor: '#333333',
+    backgroundColor: "#333333",
     borderRadius: 50,
     padding: 8,
   },
   cardContainer: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
     margin: 16,
   },
   card: {
-    backgroundColor: '#f2f2f2',
+    backgroundColor: "#f2f2f2",
     borderRadius: 8,
     padding: 16,
-    alignItems: 'center',
-    width: '30%',
-    shadowColor: '#000',
+    alignItems: "center",
+    width: "30%",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -86,15 +91,13 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333333',
+    fontWeight: "bold",
+    color: "#333333",
     marginTop: 8,
   },
   cardSubtitle: {
     fontSize: 12,
-    color: '#666666',
+    color: "#666666",
     marginTop: 4,
   },
 });
-
-export default Dashboard;

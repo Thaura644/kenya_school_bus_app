@@ -18,15 +18,6 @@ const SignupScreen = ({ navigation }) => {
   const [isSignup, setIsSignup] = useState(false);
   const [isPasswordShown, setPassowrdShow] = useState(true);
 
-  const handleLogin = () => {
-    // Implement login logic here
-    navigation.dispatch(
-      StackActions.replace("LoginScreen", {
-        user: "jane",
-      })
-    );
-  };
-
   const handleSignup = () => {
     // Implement signup logic here
     navigation.dispatch(
@@ -172,6 +163,43 @@ const SignupScreen = ({ navigation }) => {
               style={{
                 marginLeft: 10,
                 width: "85%",
+              }}
+            ></TextInput>
+          </View>
+        </View>
+        <View style={{ marginBottom: 12 }}>
+          <Text
+            style={{
+              fontSize: 16,
+              color: "black",
+              fontWeight: 500,
+              marginVertical: 8,
+            }}
+          >
+            School
+          </Text>
+          <View
+            style={{
+              width: "100%",
+              borderColor: "gray",
+              height: 50,
+              borderWidth: 1,
+              borderRadius: 8,
+              alignItems: "center",
+              justifyContent: "center",
+              paddingLeft: 22,
+            }}
+          >
+            <TextInput
+              placeholder="Select your School"
+              placeholderTextColor={"black"}
+              value={email}
+              onChangeText={(e) => {
+                setEmail(e);
+              }}
+              keyboardType="email-address"
+              style={{
+                width: "100%",
               }}
             ></TextInput>
           </View>

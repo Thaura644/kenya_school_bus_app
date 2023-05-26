@@ -10,13 +10,15 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 import Icons from "react-native-vector-icons/Entypo";
 import Icony from "react-native-vector-icons/FontAwesome5";
+import Icono from "react-native-vector-icons/AntDesign";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import RoutesScreen from "../Routes";
+import RoutesScreen from "../Screens/RoutesScreen";
 const Tab = createBottomTabNavigator();
-import StudentsScreen from "../StudentsScreen/iindex";
+import StudentsScreen from "../Screens/StudentsScreen/";
 
 import { createStackNavigator } from "@react-navigation/stack";
-import BusesScreen from "../BusesScreen";
+import BusesScreen from "../Screens/BusesScreen";
+import HomeScreen from "../Screens/HomeScreen";
 
 const Stack = createStackNavigator();
 const BusesNavigator = () => {
@@ -56,6 +58,18 @@ function RoutesNavigator() {
     </Stack.Navigator>
   );
 }
+function HomeNavigator() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      initialRouteName="RoutesScreen"
+    >
+      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+    </Stack.Navigator>
+  );
+}
 
 export default function TabNavigator() {
   return (
@@ -71,11 +85,39 @@ export default function TabNavigator() {
           right: 20,
           borderRadius: 10,
           bottom: 40,
-
-          height: 90,
+          backgroundColor: "#FECF67",
+          height: 60,
         },
       }}
     >
+      <Tab.Screen
+        name="Home"
+        component={HomeNavigator}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) => {
+            return (
+              <View
+                style={{
+                  alignItems: "center",
+                  justifyContent: "center",
+
+                  tintColor: focused ? "#2d2d2d" : "#2d2d2d",
+                }}
+              >
+                <Icono
+                  name="home"
+                  size={22}
+                  color={focused ? "#2d2d2d" : "#2d2d2d"}
+                />
+                {focused && (
+                  <Icons name="dot-single" size={20} color="#2d2d2d" />
+                )}
+              </View>
+            );
+          },
+        }}
+      />
       <Tab.Screen
         name="Buses"
         component={BusesNavigator}
@@ -88,16 +130,16 @@ export default function TabNavigator() {
                   alignItems: "center",
                   justifyContent: "center",
 
-                  tintColor: focused ? "#FECF67" : "#3f81ed",
+                  tintColor: focused ? "#2d2d2d" : "#2d2d2d",
                 }}
               >
                 <Icon
                   name="bus"
                   size={22}
-                  color={focused ? "#FECF67" : "#3f81ed"}
+                  color={focused ? "#2d2d2d" : "#2d2d2d"}
                 />
                 {focused && (
-                  <Icons name="dot-single" size={20} color="#FECF67" />
+                  <Icons name="dot-single" size={20} color="#2d2d2d" />
                 )}
               </View>
             );
@@ -117,16 +159,16 @@ export default function TabNavigator() {
                   alignItems: "center",
                   justifyContent: "center",
 
-                  tintColor: focused ? "#FECF67" : "#3f81ed",
+                  tintColor: focused ? "#2d2d2d" : "#2d2d2d",
                 }}
               >
                 <Icon
                   name="road"
                   size={22}
-                  color={focused ? "#FECF67" : "#3f81ed"}
+                  color={focused ? "#2d2d2d" : "#2d2d2d"}
                 />
                 {focused && (
-                  <Icons name="dot-single" size={20} color="#FECF67" />
+                  <Icons name="dot-single" size={20} color="#2d2d2d" />
                 )}
               </View>
             );
@@ -145,16 +187,16 @@ export default function TabNavigator() {
                   alignItems: "center",
                   justifyContent: "center",
 
-                  tintColor: focused ? "#FECF67" : "#3f81ed",
+                  tintColor: focused ? "#2d2d2d" : "#2d2d2d",
                 }}
               >
                 <Icony
                   name="user-graduate"
                   size={22}
-                  color={focused ? "#FECF67" : "#3f81ed"}
+                  color={focused ? "#2d2d2d" : "#2d2d2d"}
                 />
                 {focused && (
-                  <Icons name="dot-single" size={20} color="#FECF67" />
+                  <Icons name="dot-single" size={20} color="#2d2d2d" />
                 )}
               </View>
             );

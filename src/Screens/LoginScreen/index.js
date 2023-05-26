@@ -11,28 +11,15 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
+import { useDispatch } from "react-redux";
+import { Login } from "../../store/actions";
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isSignup, setIsSignup] = useState(false);
   const [isPasswordShown, setPassowrdShow] = useState(true);
-
+  const dispatch = useDispatch();
   const handleLogin = () => {
-    // Implement login logic here
-    navigation.dispatch(
-      StackActions.replace("LoginScreen", {
-        user: "jane",
-      })
-    );
-  };
-
-  const handleSignup = () => {
-    // Implement signup logic here
-    navigation.dispatch(
-      StackActions.replace("LoginScreen", {
-        user: "jane",
-      })
-    );
+    dispatch(Login(email, password));
   };
 
   return (
@@ -40,7 +27,7 @@ const LoginScreen = ({ navigation }) => {
       <View style={{ marginHorizontal: 22 }}>
         <View style={{ alignItems: "center" }}>
           <Image
-            source={require("../../assets/logo1.png")}
+            source={require("../../../assets/logo1.png")}
             resizeMode="contain"
             style={{
               width: 350,
@@ -134,7 +121,7 @@ const LoginScreen = ({ navigation }) => {
                 >
                   {isPasswordShown == true ? (
                     <Image
-                      source={require("../../assets/hide.png")}
+                      source={require("../../../assets/hide.png")}
                       resizeMode="contain"
                       style={{
                         width: 30,
@@ -143,7 +130,7 @@ const LoginScreen = ({ navigation }) => {
                     />
                   ) : (
                     <Image
-                      source={require("../../assets/eye.png")}
+                      source={require("../../../assets/eye.png")}
                       resizeMode="contain"
                       style={{
                         width: 30,
@@ -156,7 +143,7 @@ const LoginScreen = ({ navigation }) => {
 
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Dashboard");
+                  handleLogin();
                 }}
                 style={{
                   ...styles.button,

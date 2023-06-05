@@ -6,7 +6,7 @@ import Schedule from "../../components/Schedule";
 
 export default function HomeScreen() {
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: "white" }}>
       <View style={styles.topContainer}>
         <View
           style={{

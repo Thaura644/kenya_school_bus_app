@@ -13,13 +13,16 @@ import {
   Platform,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-export default function BusesScreen({ navigation }) {
+import PageHeader from "../../components/PageHeader";
+import BusRouteDetails from "../../components/BusRouteDetails";
+export default function ScheduledRoutesScreen({ navigation }) {
   const [pin, setPin] = useState({
     latitude: 13.4564,
     longitude: 123.3753,
     longitudeDelta: 0.005,
     latitudeDelta: 0.0005,
   });
+  const [show, setShow] = useState(true);
   return (
     <Provider>
       <SafeAreaView
@@ -32,15 +35,20 @@ export default function BusesScreen({ navigation }) {
         }}
       >
         <View style={styles.searchBox}>
-          <TextInput
-            placeholder="Enter Bus Number to track"
-            placeholderTextColor="gray"
-            autoCapitalize="none"
-            style={{ flex: 1, padding: 0 }}
-          />
-          <Icon name="bus" size={22} color="black" />
+          <PageHeader />
+          <Text style={{ fontSize: 19, width: "60%", fontWeight: "bold" }}>
+            XYZ's school bus route
+          </Text>
         </View>
+
         <MapView mapType="mutedStandard" style={{ flex: 1 }}></MapView>
+        <BusRouteDetails
+          show={show}
+          onDismiss={() => {
+            setShow(false);
+          }}
+          enableBackDropDismiss
+        />
       </SafeAreaView>
     </Provider>
   );
@@ -49,19 +57,13 @@ export default function BusesScreen({ navigation }) {
 const styles = StyleSheet.create({
   searchBox: {
     position: "absolute",
-    marginTop: Platform.OS == "ios" ? 20 : 20,
+    marginTop: 20,
     flexDirection: "row",
-    backgroundColor: "#fff",
-    width: "90%",
-    zIndex: 2000,
-    alignSelf: "center",
-    borderRadius: 5,
-    padding: 10,
 
-    shadowColor: "gray",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 10,
+    width: "100%",
+    zIndex: 2000,
+    alignItems: "center",
+    alignSelf: "flex-start",
+    borderRadius: 5,
   },
 });

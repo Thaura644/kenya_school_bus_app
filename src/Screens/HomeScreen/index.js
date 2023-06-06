@@ -4,7 +4,7 @@ import TopCard from "../../components/TopCard";
 import TodaysSchedule from "../../components/TodaysSchedule";
 import Schedule from "../../components/Schedule";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <View style={styles.topContainer}>
@@ -48,7 +48,7 @@ export default function HomeScreen() {
 
       <TodaysSchedule />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Schedule />
+        <Schedule navigation={navigation} />
         <Schedule />
       </ScrollView>
     </View>

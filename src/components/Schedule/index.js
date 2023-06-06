@@ -12,12 +12,17 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default function Schedule() {
+export default function Schedule({ navigation }) {
   const [location, setLocation] = useState("Town East, West Rd, Nakuru");
   var matches = location.match(/\b(\w)/g);
   var first = matches.join("");
   return (
-    <SafeAreaView style={styles.container}>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate("ScheduledRoutesScreen");
+      }}
+      style={styles.container}
+    >
       <View style={styles.box}>
         <Text style={styles.location}>Town East, West Rd</Text>
         <Text style={styles.shortLoc}>{first}</Text>
@@ -56,7 +61,7 @@ export default function Schedule() {
         <Text style={styles.shortLoc}>{first}</Text>
         <Text style={styles.location}>10:45 pm</Text>
       </View>
-    </SafeAreaView>
+    </TouchableOpacity>
   );
 }
 

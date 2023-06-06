@@ -17,14 +17,16 @@ export default function TopCard() {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
-  const [text, setText] = useState("Empty");
+  const [text, setText] = useState("Select date");
 
   const onChange = (event, selectedDate) => {
+    setShow(false);
     const currentDate = selectedDate || date;
     setDate(currentDate);
     let tempDate = new Date(currentDate);
     let fDate =
       tempDate.getDay() +
+      "/" +
       (tempDate.getMonth() + 1) +
       "/" +
       tempDate.getFullYear();

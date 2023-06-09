@@ -12,13 +12,14 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 import { Portal } from "react-native-paper";
+import { Skeleton } from "moti/skeleton";
 export default function TopupfromSlide({
   show,
   onDismiss,
   children,
   enableBackDropDismiss,
 }) {
-  const bottomSheetHeight = Dimensions.get("window").height * 0.3;
+  const bottomSheetHeight = Dimensions.get("window").height * 0.38;
   const deviceWidth = Dimensions.get("window").width;
   const [text, setText] = React.useState("");
   const [open, setOpen] = useState(show);
@@ -59,6 +60,23 @@ export default function TopupfromSlide({
   if (!open) {
     return null;
   }
+  /**
+      <Text
+            style={{
+              padding: 10,
+              fontSize: 20,
+              left: 20,
+              fontWeight: "bold",
+              display: "flex",
+              justifyContent: "center",
+              alignContent: "center",
+            }}
+          >
+            Morning Student Pickup
+          </Text>
+           <Text style={styles.methodname}>Bus-09</Text>
+             <Text style={styles.drivername}>John Doe</Text>
+   */
   return (
     <Portal>
       <Pressable
@@ -95,21 +113,17 @@ export default function TopupfromSlide({
             }}
           ></View>
         </View>
-        <View styles={styles.methods}>
-          <Text
-            style={{
-              padding: 10,
-              fontSize: 20,
-              left: 20,
-              fontWeight: "bold",
-              display: "flex",
-              justifyContent: "center",
-              alignContent: "center",
-            }}
-          >
-            Morning Student Pickup
-          </Text>
-
+        <View style={styles.methods}>
+          <View style={{ padding: 10, marginTop: 0 }}>
+            <Skeleton
+              width={"100%"}
+              style={{
+                padding: 10,
+              }}
+              colorMode="light"
+              height={25}
+            />
+          </View>
           <TouchableOpacity style={styles.method}>
             <View style={styles.box}>
               <Image
@@ -117,7 +131,7 @@ export default function TopupfromSlide({
                 style={{ width: 35, height: 35 }}
               />
             </View>
-            <Text style={styles.methodname}>Bus-09</Text>
+            <Skeleton width={65} colorMode="light" height={25} />
             <View
               style={{
                 justifyContent: "center",
@@ -133,7 +147,8 @@ export default function TopupfromSlide({
                 name="traffic"
                 color="green"
               ></MaterialIcons>
-              <Text>Status</Text>
+
+              <Skeleton width={65} colorMode="light" height={25} />
             </View>
           </TouchableOpacity>
           <View
@@ -146,13 +161,13 @@ export default function TopupfromSlide({
           <TouchableOpacity style={styles.method2}>
             <View style={styles.box2}>
               <Image
-                source={require("../../../assets/bus-icon.jpg")}
+                source={require("../../../assets/driver.png")}
                 style={{ width: 35, height: 35 }}
               />
             </View>
             <View>
               <Text style={styles.driver}>Assigned Driver</Text>
-              <Text style={styles.drivername}>John Doe</Text>
+              <Skeleton width={65} colorMode="light" height={25} />
             </View>
             <View
               style={{
@@ -213,7 +228,6 @@ const styles = StyleSheet.create({
   },
   driver: {
     fontWeight: "bold",
-    left: 20,
   },
   box: {
     justifyContent: "center",
@@ -232,6 +246,7 @@ const styles = StyleSheet.create({
   methodname: {
     left: 16,
     color: "black",
+    fontWeight: "bold",
   },
   root: {
     position: "absolute",

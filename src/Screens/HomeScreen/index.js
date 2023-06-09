@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, Image, ScrollView } from "react-native";
 import TopCard from "../../components/TopCard";
 import TodaysSchedule from "../../components/TodaysSchedule";
 import Schedule from "../../components/Schedule";
-
+import { Skeleton } from "moti/skeleton";
 export default function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -33,14 +33,7 @@ export default function HomeScreen({ navigation }) {
             </Text>
           </View>
           <View>
-            <Image
-              source={require("../../../assets/avatar.jpg")}
-              style={{
-                width: 60,
-                height: 60,
-                borderRadius: 50,
-              }}
-            />
+            <Skeleton width={45} radius="round" colorMode="light" height={45} />
           </View>
         </View>
         <TopCard />

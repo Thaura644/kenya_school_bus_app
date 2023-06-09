@@ -27,6 +27,15 @@ export const Login = (email, password) => {
   };
 };
 
+export const Loading = (state) => {
+  return async (dispatch) => {
+    dispatch({
+      type: "LOADER",
+      payload: state,
+    });
+  };
+};
+
 export const SignUp = (email, password) => {
   return async () => {};
 };

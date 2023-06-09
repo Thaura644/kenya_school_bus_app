@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
+import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 import Icon from "react-native-vector-icons/FontAwesome";
 import PageHeader from "../../components/PageHeader";
 import BusRouteDetails from "../../components/BusRouteDetails";
@@ -49,6 +50,25 @@ export default function ScheduledRoutesScreen({ navigation }) {
           }}
           enableBackDropDismiss
         />
+        <TouchableOpacity
+          onPress={() => {
+            setShow(true);
+          }}
+          style={{
+            elevation: 10,
+            position: "absolute",
+            bottom: 120,
+            right: 15,
+            backgroundColor: "white",
+            borderRadius: 50,
+            width: 30,
+            justifyContent: "center",
+            alignItems: "center",
+            height: 30,
+          }}
+        >
+          <MaterialCommunityIcons name="routes" color="#FECF67" size={20} />
+        </TouchableOpacity>
       </SafeAreaView>
     </Provider>
   );

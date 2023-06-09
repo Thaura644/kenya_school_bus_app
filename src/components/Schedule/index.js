@@ -11,11 +11,15 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-
+import { Skeleton } from "moti/skeleton";
 export default function Schedule({ navigation }) {
   const [location, setLocation] = useState("Town East, West Rd, Nakuru");
   var matches = location.match(/\b(\w)/g);
   var first = matches.join("");
+  /** <Image
+            source={require("../../../assets/route.png")}
+            style={{ width: 20, height: 20 }}
+          /> */
   return (
     <TouchableOpacity
       onPress={() => {
@@ -24,9 +28,9 @@ export default function Schedule({ navigation }) {
       style={styles.container}
     >
       <View style={styles.box}>
-        <Text style={styles.location}>Town East, West Rd</Text>
-        <Text style={styles.shortLoc}>{first}</Text>
-        <Text style={styles.location}>10:45 pm</Text>
+        <Skeleton width={65} colorMode="light" height={15} />
+        <Skeleton width={45} colorMode="light" height={25} />
+        <Skeleton width={45} colorMode="light" height={15} />
       </View>
 
       <View style={styles.box2}>
@@ -41,14 +45,12 @@ export default function Schedule({ navigation }) {
         <View
           style={{ backgroundColor: "#e0e5ee", padding: 10, borderRadius: 50 }}
         >
-          <Image
-            source={require("../../../assets/route.png")}
-            style={{ width: 20, height: 20 }}
-          />
+          <Skeleton width={45} radius="round" colorMode="light" height={45} />
         </View>
         <View
           style={{
             flex: 1,
+
             height: 1,
 
             backgroundColor: "grey",
@@ -57,9 +59,10 @@ export default function Schedule({ navigation }) {
         />
       </View>
       <View style={styles.box}>
-        <Text style={styles.location}>Town East, West Rd</Text>
-        <Text style={styles.shortLoc}>{first}</Text>
-        <Text style={styles.location}>10:45 pm</Text>
+        <Skeleton width={65} colorMode="light" height={15} />
+        <Skeleton width={45} colorMode="light" height={25} />
+
+        <Skeleton width={45} colorMode="light" height={15} />
       </View>
     </TouchableOpacity>
   );

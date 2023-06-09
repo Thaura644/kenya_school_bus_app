@@ -95,6 +95,21 @@ export default function TabNavigator() {
           backgroundColor: "#FECF67",
           height: 60,
         },
+        tabBarIcon: ({ focused }) => {
+          return (
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+
+                tintColor: focused ? "#2d2d2d" : "#2d2d2d",
+              }}
+            >
+              <Icono size={22} color={focused ? "#2d2d2d" : "#2d2d2d"} />
+              {focused && <Icons name="dot-single" size={20} color="#2d2d2d" />}
+            </View>
+          );
+        },
       }}
     >
       <Tab.Screen
@@ -102,6 +117,7 @@ export default function TabNavigator() {
         component={HomeNavigator}
         options={{
           headerShown: false,
+
           tabBarIcon: ({ focused }) => {
             return (
               <View

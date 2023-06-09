@@ -5,18 +5,20 @@ import { Provider } from "react-redux";
 import TabNavigator from "./src/components/tab";
 import AuthNavigator from "./src/components/authNavigator";
 import { store } from "./src/store";
-import { Init } from "./src/store/actions";
+import { Init, Loading } from "./src/store/actions";
 import { ActivityIndicator } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
+import "react-native-reanimated";
+import "react-native-gesture-handler";
 export default function App() {
   const RootNavigator = () => {
     const token = useSelector((state) => state.Reducers.authToken);
-    const [loading, setLoading] = useState(true);
+    const loading = useSelector((state) => state.Reducers.loader);
 
     const dispatch = useDispatch();
     const init = async () => {
       await dispatch(Init());
-      setLoading(false);
+      dispatch(Loading(false));
     };
 
     useEffect(() => {

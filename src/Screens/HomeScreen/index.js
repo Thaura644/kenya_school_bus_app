@@ -3,10 +3,10 @@ import { View, StyleSheet, Text, Image, ScrollView } from "react-native";
 import TopCard from "../../components/TopCard";
 import TodaysSchedule from "../../components/TodaysSchedule";
 import Schedule from "../../components/Schedule";
-
-export default function HomeScreen() {
+import { Skeleton } from "moti/skeleton";
+export default function HomeScreen({ navigation }) {
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: "white" }}>
       <View style={styles.topContainer}>
         <View
           style={{
@@ -33,14 +33,7 @@ export default function HomeScreen() {
             </Text>
           </View>
           <View>
-            <Image
-              source={require("../../../assets/avatar.jpg")}
-              style={{
-                width: 60,
-                height: 60,
-                borderRadius: 50,
-              }}
-            />
+            <Skeleton width={45} radius="round" colorMode="light" height={45} />
           </View>
         </View>
         <TopCard />
@@ -48,7 +41,7 @@ export default function HomeScreen() {
 
       <TodaysSchedule />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Schedule />
+        <Schedule navigation={navigation} />
         <Schedule />
       </ScrollView>
     </View>

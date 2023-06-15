@@ -33,12 +33,12 @@ export default function BusesScreen({ navigation }) {
       >
         <View style={styles.searchBox}>
           <TextInput
-            placeholder="Where to?"
+            placeholder="Enter Bus Number to track"
             placeholderTextColor="gray"
             autoCapitalize="none"
             style={{ flex: 1, padding: 0 }}
           />
-          <Icon name="location-arrow" size={22} color="black" />
+          <Icon name="bus" size={22} color="black" />
         </View>
         <MapView mapType="mutedStandard" style={{ flex: 1 }}></MapView>
       </SafeAreaView>

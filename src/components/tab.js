@@ -19,6 +19,8 @@ import StudentsScreen from "../Screens/StudentsScreen/";
 import { createStackNavigator } from "@react-navigation/stack";
 import BusesScreen from "../Screens/BusesScreen";
 import HomeScreen from "../Screens/HomeScreen";
+import ScheduledRoutesScreen from "../Screens/ScheduledRoutesScreen";
+import { useNavigation } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
 const BusesNavigator = () => {
@@ -67,6 +69,10 @@ function HomeNavigator() {
       initialRouteName="RoutesScreen"
     >
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen
+        name="ScheduledRoutesScreen"
+        component={ScheduledRoutesScreen}
+      />
     </Stack.Navigator>
   );
 }
@@ -83,10 +89,26 @@ export default function TabNavigator() {
           ...styles.shadow,
           left: 20,
           right: 20,
+
           borderRadius: 10,
           bottom: 40,
           backgroundColor: "#FECF67",
           height: 60,
+        },
+        tabBarIcon: ({ focused }) => {
+          return (
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+
+                tintColor: focused ? "#2d2d2d" : "#2d2d2d",
+              }}
+            >
+              <Icono size={22} color={focused ? "#2d2d2d" : "#2d2d2d"} />
+              {focused && <Icons name="dot-single" size={20} color="#2d2d2d" />}
+            </View>
+          );
         },
       }}
     >
@@ -95,6 +117,7 @@ export default function TabNavigator() {
         component={HomeNavigator}
         options={{
           headerShown: false,
+
           tabBarIcon: ({ focused }) => {
             return (
               <View

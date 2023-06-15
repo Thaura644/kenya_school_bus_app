@@ -8,18 +8,50 @@ import {
   Image,
   Pressable,
   TextInput,
+  Keyboard,
   StyleSheet,
   ScrollView,
 } from "react-native";
 import { useDispatch } from "react-redux";
-import { Login } from "../../store/actions";
+import { Loading, Login } from "../../store/actions";
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState("");
   const [isPasswordShown, setPassowrdShow] = useState(true);
   const dispatch = useDispatch();
-  const handleLogin = () => {
-    dispatch(Login(email, password));
+  const handleError = (error, input) => {
+    setErrors((prevState) => ({ ...prevState, [input]: error }));
+  };
+  const handleLogin = async () => {
+    await dispatch(Login(email, password));
+    dispatch(Loading(false));
+  };
+  const validate = () => {
+    Keyboard.dismiss();
+
+    let isValid = true;
+    dispatch(Loading(true));
+    if (!email) {
+      handleError("Please input email", "email");
+      isValid = false;
+
+      dispatch(Loading(false));
+    } else if (!email.match(/\S+@\S+\.\S+/)) {
+      handleError("Please input a valid email", "email");
+      isValid = false;
+      dispatch(Loading(false));
+    }
+
+    if (!password) {
+      handleError("Please input your password", "password");
+      isValid = false;
+      dispatch(Loading(false));
+    }
+
+    if (isValid) {
+      handleLogin();
+    }
   };
 
   return (
@@ -75,6 +107,11 @@ const LoginScreen = ({ navigation }) => {
                   }}
                 ></TextInput>
               </View>
+              {errors.email && (
+                <Text style={{ marginTop: 7, color: "red", fontSize: 12 }}>
+                  {errors.email}
+                </Text>
+              )}
             </View>
 
             <View style={{ marginBottom: 12 }}>
@@ -140,10 +177,15 @@ const LoginScreen = ({ navigation }) => {
                   )}
                 </TouchableOpacity>
               </View>
+              {errors.password && (
+                <Text style={{ marginTop: 7, color: "red", fontSize: 12 }}>
+                  {errors.password}
+                </Text>
+              )}
 
               <TouchableOpacity
                 onPress={() => {
-                  handleLogin();
+                  validate();
                 }}
                 style={{
                   ...styles.button,

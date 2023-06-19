@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export default function config(session_id){
-    axios.create({
-        baseURL:'10.1.53.119:8069',//vhange this to your ip address or create an env file
-    })
-
-}
+const config = axios.create({
+    baseURL: `http://${`10.1.131.2:8069`}`,
+    timeout: 1000,
+  });
+  
+export default config;

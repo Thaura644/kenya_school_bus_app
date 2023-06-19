@@ -34,7 +34,7 @@ export default function App() {
     }
     return (
       <NavigationContainer>
-        {token !== null ? <AuthNavigator /> : <TabNavigator />}
+        {token === null ? <AuthNavigator /> : <TabNavigator />}
       </NavigationContainer>
     );
   };

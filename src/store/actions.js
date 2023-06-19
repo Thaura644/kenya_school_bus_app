@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import config from "../features/config";
 
 export const Init = () => {
   return async (dispatch) => {
@@ -13,13 +14,18 @@ export const Init = () => {
   };
 };
 
-export const Login = (email, password) => {
+export const Login = (email, password,session_id) => {
   return async (dispatch) => {
     let token = null;
-    if (email === "admin@admin.com" && password == "1234") {
-      token = email + password;
-      await AsyncStorage.setItem("token", token);
+    data = {
+      database:'ui',//change this to your database name or create an env file
+      email: email,
+      password:password
     }
+    const response = await config.post({url:'/login',data:data,method: 'POST'})
+    console.log(response);
+    await AsyncStorage.setItem("token", token);
+
     dispatch({
       type: "LOGIN",
       payload: token,

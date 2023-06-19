@@ -36,17 +36,16 @@ const LoginScreen = ({ navigation }) => {
       handleError("Please input email", "email");
       isValid = false;
 
-      dispatch(Loading(false));
+     
     } else if (!email.match(/\S+@\S+\.\S+/)) {
       handleError("Please input a valid email", "email");
       isValid = false;
-      dispatch(Loading(false));
+      
     }
 
     if (!password) {
       handleError("Please input your password", "password");
       isValid = false;
-      dispatch(Loading(false));
     }
 
     if (isValid) {

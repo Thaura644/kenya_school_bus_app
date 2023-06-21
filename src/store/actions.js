@@ -18,21 +18,40 @@ export const Init = () => {
 export const Login = (email, password) => {
   return async (dispatch) => {
     let token = null;
-    try{
-    const response = await axios.get(`http://10.1.131.2:8069/login?db=${'ui'}&email=${email}&password=${password}`)
-    console.log(response.headers["set-cookie"][0])
-   // await AsyncStorage.setItem("token", token);
+    try {
+      const response = await axios.get(
+        `http://{BASE_URL}:8069/login?db=${DB_NAME}&email=${email}&password=${password}`
+      );
+      console.log(response.data);
+      const setCookieHeader = response.headers["set-cookie"];
+      const cookie = setCookieHeader[0];
+      const sessionId = cookie.split(";")[0].split("=")[1];
+      await AsyncStorage.setItem("token", sessionId);
+      await dispatch({
+        type: "LOGIN",
+        payload: sessionId,
+      });
+      await dispatch({
+        type: "USER",
+        payload: response.data,
+      });
+    } catch (e) {
+      console.log(e);
     }
-    catch(e){
-     
-    }
-    dispatch({
-      type: "LOGIN",
-      payload: token,
-    });
   };
 };
 
+export const getUserDetails = (sessionId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`http://{BASE_URL}/get_user_details`, {
+        headers: {
+          "X-Session-ID": sessionId,
+        },
+      });
+    } catch (e) {}
+  };
+};
 export const Loading = (state) => {
   return async (dispatch) => {
     dispatch({

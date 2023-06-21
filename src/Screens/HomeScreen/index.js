@@ -1,10 +1,21 @@
 import React from "react";
-import { View, StyleSheet, Text, Image, ScrollView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  ScrollView,
+  Pressable,
+} from "react-native";
 import TopCard from "../../components/TopCard";
 import TodaysSchedule from "../../components/TodaysSchedule";
 import Schedule from "../../components/Schedule";
 import { Skeleton } from "moti/skeleton";
+import { useDispatch, useSelector } from "react-redux";
 export default function HomeScreen({ navigation }) {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.Reducers.user);
+  console.log(user);
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <View style={styles.topContainer}>
@@ -26,11 +37,19 @@ export default function HomeScreen({ navigation }) {
             >
               Welome Aboard,
             </Text>
-            <Text
-              style={{ fontWeight: "bold", fontSize: 17, color: "#2d2d2d" }}
+            <Pressable
+              onPress={() => {
+                dispatch({
+                  type: "LOGOUT",
+                });
+              }}
             >
-              Tom
-            </Text>
+              <Text
+                style={{ fontWeight: "bold", fontSize: 17, color: "#2d2d2d" }}
+              >
+                {user.name}
+              </Text>
+            </Pressable>
           </View>
           <View>
             <Skeleton width={45} radius="round" colorMode="light" height={45} />

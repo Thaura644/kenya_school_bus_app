@@ -12,13 +12,13 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 import moment from "moment";
 import DateTimePicker from "@react-native-community/datetimepicker";
-
+import { useSelector } from "react-redux";
 export default function TopCard() {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
   const [text, setText] = useState("Select date");
-
+  const user = useSelector((state) => state.Reducers.user);
   const onChange = (event, selectedDate) => {
     setShow(false);
     const currentDate = selectedDate || date;

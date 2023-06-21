@@ -14,6 +14,7 @@ export default function App() {
   const RootNavigator = () => {
     const token = useSelector((state) => state.Reducers.authToken);
     const loading = useSelector((state) => state.Reducers.loader);
+    const user = useSelector((state) => state.Reducers.user);
 
     const dispatch = useDispatch();
     const init = async () => {
@@ -34,7 +35,7 @@ export default function App() {
     }
     return (
       <NavigationContainer>
-        {token === null ? <AuthNavigator /> : <TabNavigator />}
+        {token === null || user === [] ? <AuthNavigator /> : <TabNavigator />}
       </NavigationContainer>
     );
   };

@@ -10,6 +10,8 @@ import { ActivityIndicator } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import "react-native-reanimated";
 import "react-native-gesture-handler";
+
+
 export default function App() {
   const RootNavigator = () => {
     const token = useSelector((state) => state.Reducers.authToken);
@@ -34,11 +36,16 @@ export default function App() {
     }
     return (
       <NavigationContainer>
-        {token === null || user.length === 0 ? (
+
+        {token === null || user === [] ? <AuthNavigator /> : <TabNavigator />}
+        {/* <TabNavigator /> */}
+
+  {/* {token === null || user.length === 0 ? (
           <AuthNavigator />
         ) : (
           <TabNavigator />
-        )}
+        )}*/}
+
       </NavigationContainer>
     );
   };

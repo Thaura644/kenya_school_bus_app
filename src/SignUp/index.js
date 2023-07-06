@@ -364,7 +364,7 @@ const SignupScreen = ({ navigation }) => {
 
           <TouchableOpacity
             onPress={() => {
-              onLogin();
+              Login();
             }}
             style={{
               ...styles.button,

@@ -23,7 +23,6 @@ export default function App() {
       await dispatch(Init());
       dispatch(Loading(false));
     };
-
     useEffect(() => {
       init();
     }, []);
@@ -37,8 +36,16 @@ export default function App() {
     }
     return (
       <NavigationContainer>
+
         {token === null || user === [] ? <AuthNavigator /> : <TabNavigator />}
         {/* <TabNavigator /> */}
+
+  {/* {token === null || user.length === 0 ? (
+          <AuthNavigator />
+        ) : (
+          <TabNavigator />
+        )}*/}
+
       </NavigationContainer>
     );
   };

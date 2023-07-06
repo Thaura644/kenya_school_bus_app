@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StackActions } from "@react-navigation/native";
 import {
   View,
@@ -11,12 +11,24 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
+import { SelectList } from "react-native-dropdown-select-list";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
-  const [school, setSchool] = useState('');
+
+  const dbschools = AsyncStorage.getItem("schools");
+  const [selected, setSelected] = React.useState("");
+  const [admission, setAdmission] = useState("");
+  const [school, setSchool] = React.useState("");
+  const [schools, setSchools] = React.useState([]);
+
+  
+
   const [fullname, setFullname] = useState("");
   const [password, setPassword] = useState("");
-  const [isSignup, setIsSignup] = useState(false);
+
   const [isPasswordShown, setPassowrdShow] = useState(true);
 
   const handleSignup = () => {const [school, setSchool] = useState('');
@@ -28,6 +40,25 @@ const SignupScreen = ({ navigation }) => {
     );
   };
 
+  const data = [
+    { key: "1", value: "Administrator" },
+    { key: "2", value: "Parent" },
+    { key: "3", value: "Driver" },
+    { key: "4", value: "Student" },
+    ,
+  ];
+
+  const fetchSchools = async () => {
+    try {
+      const response = await axios.get(`http://192.168.73.168:8069/getschools`);
+      console.log(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    fetchSchools();
+  }, []);
   return (
     <ScrollView
       style={{ backgroundColor: "white" }}
@@ -92,82 +123,146 @@ const SignupScreen = ({ navigation }) => {
               marginVertical: 8,
             }}
           >
-            Email Address
+            Select Account Type
           </Text>
-          <View
-            style={{
-              width: "100%",
-              borderColor: "gray",
-              height: 50,
-              borderWidth: 1,
-              borderRadius: 8,
-              alignItems: "center",
-              justifyContent: "center",
-              paddingLeft: 22,
+          <SelectList
+            setSelected={(val) => {
+              setSelected(val);
             }}
-          >
-            <TextInput
-              placeholder="Enter your email "
-              placeholderTextColor={"black"}
-              value={email}
-              onChangeText={(e) => {
-                setEmail(e);
+            data={data}
+            save="value"
+          />
+        </View>
+        {selected !== "Student" && (
+          <View style={{ marginBottom: 12 }}>
+            <Text
+              style={{
+                fontSize: 16,
+                color: "black",
+                fontWeight: 500,
+                marginVertical: 8,
               }}
-              keyboardType="email-address"
+            >
+              Email Address
+            </Text>
+
+            <View
               style={{
                 width: "100%",
+                borderColor: "gray",
+                height: 50,
+                borderWidth: 1,
+                borderRadius: 8,
+                alignItems: "center",
+                justifyContent: "center",
+                paddingLeft: 22,
               }}
-            ></TextInput>
+            >
+              <TextInput
+                placeholder="Enter your email "
+                placeholderTextColor={"black"}
+                value={email}
+                onChangeText={(e) => {
+                  setEmail(e);
+                }}
+                keyboardType="email-address"
+                style={{
+                  width: "100%",
+                }}
+              ></TextInput>
+            </View>
           </View>
-        </View>
-        <View style={{ marginBottom: 12 }}>
-          <Text
-            style={{
-              fontSize: 16,
-              color: "black",
-              fontWeight: 500,
-              marginVertical: 8,
-            }}
-          >
-            Phone Number
-          </Text>
-          <View
-            style={{
-              width: "100%",
-              borderColor: "gray",
-              height: 50,
-              borderWidth: 1,
-              justifyContent: "space-between",
-              flexDirection: "row",
+        )}
+        {selected === "Student" && (
+          <View style={{ marginBottom: 12 }}>
+            <Text
+              style={{
+                fontSize: 16,
+                color: "black",
+                fontWeight: 500,
+                marginVertical: 8,
+              }}
+            >
+              Admission Number
+            </Text>
 
-              borderRadius: 8,
-              alignItems: "center",
-              justifyContent: "center",
-              paddingLeft: 22,
-            }}
-          >
-            <TextInput
-              placeholder="+254"
-              editable={false}
-              placeholderTextColor={"black"}
-              keyboardType="numeric"
+            <View
               style={{
-                width: "15%",
-                borderRightWidth: 1,
-                borderRightColor: "black",
+                width: "100%",
+                borderColor: "gray",
+                height: 50,
+                borderWidth: 1,
+                borderRadius: 8,
+                alignItems: "center",
+                justifyContent: "center",
+                paddingLeft: 22,
               }}
-            ></TextInput>
-            <TextInput
-              placeholder="Enter your phone number"
-              placeholderTextColor={"black"}
-              keyboardType="numeric"
-              style={{
-                marginLeft: 10,
-                width: "85%",
-              }}
-            ></TextInput>
+            >
+              <TextInput
+                placeholder="Enter your admission number"
+                placeholderTextColor={"black"}
+                value={admission}
+                onChangeText={(e) => {
+                  setAdmission(e);
+                }}
+                keyboardType="email-address"
+                style={{
+                  width: "100%",
+                }}
+              ></TextInput>
+            </View>
           </View>
-        </View>
+        )}
+        {selected !== "Student" && (
+          <View style={{ marginBottom: 12 }}>
+            <Text
+              style={{
+                fontSize: 16,
+                color: "black",
+                fontWeight: 500,
+                marginVertical: 8,
+              }}
+            >
+              Phone Number
+            </Text>
+            <View
+              style={{
+                width: "100%",
+                borderColor: "gray",
+                height: 50,
+                borderWidth: 1,
+                justifyContent: "space-between",
+                flexDirection: "row",
+
+                borderRadius: 8,
+                alignItems: "center",
+                justifyContent: "center",
+                paddingLeft: 22,
+              }}
+            >
+              <TextInput
+                placeholder="+254"
+                editable={false}
+                placeholderTextColor={"black"}
+                keyboardType="numeric"
+                style={{
+                  width: "15%",
+                  borderRightWidth: 1,
+                  borderRightColor: "black",
+                }}
+              ></TextInput>
+              <TextInput
+                placeholder="Enter your phone number"
+                placeholderTextColor={"black"}
+                keyboardType="numeric"
+                style={{
+                  marginLeft: 10,
+                  width: "85%",
+                }}
+              ></TextInput>
+            </View>
+          </View>
+        )}
         <View style={{ marginBottom: 12 }}>
           <Text
             style={{
@@ -177,20 +272,18 @@ const SignupScreen = ({ navigation }) => {
               marginVertical: 8,
             }}
           >
-            School
+            Select School
           </Text>
-          <View
-            style={{
-              width: "100%",
-              borderColor: "gray",
-              height: 50,
-              borderWidth: 1,
-              borderRadius: 8,
-              alignItems: "center",
-              justifyContent: "center",
-              paddingLeft: 22,
+
+          <SelectList
+            setSelected={(val) => {
+              setSchool(val);
             }}
-          >
+            data={schools}
+            save="value"
+          />
+
+
             <TextInput
               placeholder="Select your School"
               placeholderTextColor={"black"}
@@ -203,6 +296,7 @@ const SignupScreen = ({ navigation }) => {
               }}
             />
           </View>
+
         </View>
         <View style={{ marginBottom: 12 }}>
           <Text

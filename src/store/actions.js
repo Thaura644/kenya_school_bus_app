@@ -5,8 +5,8 @@ import axios from "axios";
 export const Init = () => {
   return async (dispatch) => {
     let token = await AsyncStorage.getItem("token");
+    getSchools();
     if (token !== null) {
-      console.log("token fetched");
       dispatch({
         type: "LOGIN",
         payload: token,
@@ -21,9 +21,8 @@ export const Login = (email, password) => {
     const DB_NAME = "DbKSBA"
     try {
       const response = await axios.get(
-        `http://{BASE_URL}:8069/login?db=${DB_NAME}&email=${email}&password=${password}`
+        `http://192.168.233.168:8069/login?db=ui&email=${email}&password=${password}`
       );
-      console.log(response.data);
       const setCookieHeader = response.headers["set-cookie"];
       const cookie = setCookieHeader[0];
       const sessionId = cookie.split(";")[0].split("=")[1];
@@ -32,16 +31,29 @@ export const Login = (email, password) => {
         type: "LOGIN",
         payload: sessionId,
       });
+
       await dispatch({
         type: "USER",
         payload: response.data,
       });
+    } catch (e) {}
+  };
+};
+
+export const getSchools = () => {
+  return async () => {
+    try {
+      const response = await axios.get(`http://192.168.73.168:8069/getschools`);
+      console.log(response);
+      await AsyncStorage.setItem(
+        "schools",
+        JSON.stringify(response.data.response)
+      );
     } catch (e) {
       console.log(e);
     }
   };
 };
-
 export const getUserDetails = (sessionId) => {
   return async (dispatch) => {
     try {

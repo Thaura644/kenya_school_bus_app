@@ -18,6 +18,7 @@ export const Init = () => {
 export const Login = (email, password) => {
   return async (dispatch) => {
     let token = null;
+    const DB_NAME = "DbKSBA"
     try {
       const response = await axios.get(
         `http://{BASE_URL}:8069/login?db=${DB_NAME}&email=${email}&password=${password}`

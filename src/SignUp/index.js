@@ -13,12 +13,13 @@ import {
 } from "react-native";
 const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
+  const [school, setSchool] = useState('');
   const [fullname, setFullname] = useState("");
   const [password, setPassword] = useState("");
   const [isSignup, setIsSignup] = useState(false);
   const [isPasswordShown, setPassowrdShow] = useState(true);
 
-  const handleSignup = () => {
+  const handleSignup = () => {const [school, setSchool] = useState('');
     // Implement signup logic here
     navigation.dispatch(
       StackActions.replace("LoginScreen", {
@@ -193,15 +194,14 @@ const SignupScreen = ({ navigation }) => {
             <TextInput
               placeholder="Select your School"
               placeholderTextColor={"black"}
-              value={email}
-              onChangeText={(e) => {
-                setEmail(e);
+              value={school}
+              onChangeText={(text) => {
+                setSchool(text);
               }}
-              keyboardType="email-address"
               style={{
                 width: "100%",
               }}
-            ></TextInput>
+            />
           </View>
         </View>
         <View style={{ marginBottom: 12 }}>

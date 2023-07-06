@@ -13,7 +13,7 @@ import {
   ScrollView,
 } from "react-native";
 import { useDispatch } from "react-redux";
-import { Loading, Login } from "../../store/actions";
+import { Login } from "../../store/actions";
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,28 +25,27 @@ const LoginScreen = ({ navigation }) => {
   };
   const handleLogin = async () => {
     await dispatch(Login(email, password));
-    dispatch(Loading(false));
+
   };
   const validate = () => {
     Keyboard.dismiss();
 
     let isValid = true;
-    dispatch(Loading(true));
+  
     if (!email) {
       handleError("Please input email", "email");
       isValid = false;
 
-      dispatch(Loading(false));
+     
     } else if (!email.match(/\S+@\S+\.\S+/)) {
       handleError("Please input a valid email", "email");
       isValid = false;
-      dispatch(Loading(false));
+      
     }
 
     if (!password) {
       handleError("Please input your password", "password");
       isValid = false;
-      dispatch(Loading(false));
     }
 
     if (isValid) {

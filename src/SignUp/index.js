@@ -17,17 +17,21 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
+
   const dbschools = AsyncStorage.getItem("schools");
   const [selected, setSelected] = React.useState("");
   const [admission, setAdmission] = useState("");
   const [school, setSchool] = React.useState("");
   const [schools, setSchools] = React.useState([]);
+
+  
+
   const [fullname, setFullname] = useState("");
   const [password, setPassword] = useState("");
 
   const [isPasswordShown, setPassowrdShow] = useState(true);
 
-  const handleSignup = () => {
+  const handleSignup = () => {const [school, setSchool] = useState('');
     // Implement signup logic here
     navigation.dispatch(
       StackActions.replace("LoginScreen", {
@@ -278,6 +282,21 @@ const SignupScreen = ({ navigation }) => {
             data={schools}
             save="value"
           />
+
+
+            <TextInput
+              placeholder="Select your School"
+              placeholderTextColor={"black"}
+              value={school}
+              onChangeText={(text) => {
+                setSchool(text);
+              }}
+              style={{
+                width: "100%",
+              }}
+            />
+          </View>
+
         </View>
         <View style={{ marginBottom: 12 }}>
           <Text

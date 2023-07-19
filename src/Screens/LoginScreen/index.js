@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StackActions } from "@react-navigation/native";
+import { useNavigation } from '@react-navigation/native';
 import {
   View,
   Text,
@@ -14,7 +15,7 @@ import {
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { Login } from "../../store/actions";
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation =useNavigation() }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState("");
@@ -23,8 +24,15 @@ const LoginScreen = ({ navigation }) => {
   const handleError = (error, input) => {
     setErrors((prevState) => ({ ...prevState, [input]: error }));
   };
+ 
   const handleLogin = async () => {
     await dispatch(Login(email, password));
+    navigation.navigate('StudentsScreen', {
+      fullname,
+      email,
+      school
+
+    });
 
   };
   const validate = () => {

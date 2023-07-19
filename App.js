@@ -36,16 +36,11 @@ export default function App() {
     }
     return (
       <NavigationContainer>
-
-        {token === null || user === [] ? <AuthNavigator /> : <TabNavigator />}
-        {/* <TabNavigator /> */}
-
-  {/* {token === null || user.length === 0 ? (
+ {token === null || user.length === 0 ? (
           <AuthNavigator />
         ) : (
           <TabNavigator />
-        )}*/}
-
+        )}
       </NavigationContainer>
     );
   };

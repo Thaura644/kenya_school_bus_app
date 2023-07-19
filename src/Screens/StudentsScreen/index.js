@@ -1,25 +1,37 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 
-export default function StudentsScreen() {
-  const [fullname, setFullname] = useState("");
-  const [email, setEmail] = useState("");
-  const [school, setSchool] = useState("");
+const StudentsScreen = () => {
+  const route = useRoute();
+  const { fullname, email, school } = route.params;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Student Profile</Text>
-      <View style={styles.profileInfo}>
-        <Text style={styles.label}>Full Name:</Text>
-        <Text style={styles.value}>{fullname}</Text>
+      <View style={styles.profileContainer}>
+        <Image
+          // source={require("../../assets/icons8-circled-profile-64.png")}
+          style={styles.profileImage}
+        />
+        <Text style={styles.fullname}>{fullname}</Text>
+        <Text style={styles.email}>{email}</Text>
+        <Text style={styles.school}>{school}</Text>
       </View>
-      <View style={styles.profileInfo}>
-        <Text style={styles.label}>Email:</Text>
-        <Text style={styles.value}>{email}</Text>
-      </View>
-      <View style={styles.profileInfo}>
-        <Text style={styles.label}>School:</Text>
-        <Text style={styles.value}>{school}</Text>
+
+      <View style={styles.sectionContainer}>
+        <Text style={styles.sectionTitle}>Personal Information</Text>
+        <View style={styles.infoRow}>
+          <Text style={styles.infoLabel}>Full Name:</Text>
+          <Text style={styles.infoValue}>{fullname}</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text style={styles.infoLabel}>Email:</Text>
+          <Text style={styles.infoValue}>{email}</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text style={styles.infoLabel}>School:</Text>
+          <Text style={styles.infoValue}>{school}</Text>
+        </View>
       </View>
     </View>
   );
@@ -28,26 +40,54 @@ export default function StudentsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: '#FFFFFF',
+    paddingHorizontal: 20,
+    paddingTop: 40,
   },
-  heading: {
-    fontSize: 24,
-    fontWeight: "bold",
+  profileContainer: {
+    alignItems: 'center',
+    marginBottom: 40,
+  },
+  profileImage: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
     marginBottom: 20,
   },
-  profileInfo: {
-    flexDirection: "row",
+  fullname: {
+    fontSize: 24,
+    fontWeight: 'bold',
     marginBottom: 10,
   },
-  label: {
-    fontWeight: "bold",
-    marginRight: 10,
+  email: {
+    fontSize: 16,
+    color: '#888888',
+    marginBottom: 10,
   },
-  value: {
+  school: {
+    fontSize: 16,
+    color: '#888888',
+  },
+  sectionContainer: {
+    marginBottom: 20,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  infoRow: {
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
+  infoLabel: {
+    width: 100,
+    fontWeight: 'bold',
+  },
+  infoValue: {
     flex: 1,
   },
 });
 
+export default StudentsScreen;
 

@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import TopCard from "../../components/TopCard";
+import TodaysSchedule from "../../components/TodaysSchedule";
+import Schedule from "../../components/Schedule";
+import { Skeleton } from "moti/skeleton";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function RoutesScreen() {
+export default function RoutesScreen({ navigation }) {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.Reducers.user);
+  console.log(user);
   const [routes, setRoutes] = useState([]);
   const [newRouteName, setNewRouteName] = useState('');
   const [stops, setStops] = useState([]);
   const [newStopName, setNewStopName] = useState('');
+  const [selectedRouteId, setSelectedRouteId] = useState('');
 
   // Fetch routes from the backend
   useEffect(() => {
@@ -15,7 +24,7 @@ export default function RoutesScreen() {
   const fetchRoutes = async () => {
     try {
       // Make an API call to fetch routes
-      const response = await fetch('http://your-api-endpoint/routes');
+      const response = await fetch('https://3bd0-41-89-99-5.ngrok-free.app/api/get_route/');
       const data = await response.json();
       setRoutes(data);
     } catch (error) {
@@ -27,7 +36,7 @@ export default function RoutesScreen() {
   const addRoute = async () => {
     try {
       // Make an API call to create a new route
-      const response = await fetch('http://your-api-endpoint/routes', {
+      const response = await fetch('https://3bd0-41-89-99-5.ngrok-free.app/api/get_route/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,9 +55,10 @@ export default function RoutesScreen() {
   const fetchStops = async (routeId) => {
     try {
       // Make an API call to fetch stops for a specific route
-      const response = await fetch(`http://your-api-endpoint/routes/${routeId}/stops`);
+      const response = await fetch(`https://3bd0-41-89-99-5.ngrok-free.app/api/get_route/${routeId}`);
       const data = await response.json();
       setStops(data);
+      setSelectedRouteId(routeId);
     } catch (error) {
       console.error(error);
       // Handle error
@@ -58,7 +68,7 @@ export default function RoutesScreen() {
   const addStop = async (routeId) => {
     try {
       // Make an API call to create a new stop for a specific route
-      const response = await fetch(`http://your-api-endpoint/routes/${routeId}/stops`, {
+      const response = await fetch(`https://3bd0-41-89-99-5.ngrok-free.app/api/get_route/${routeId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -75,8 +85,30 @@ export default function RoutesScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>Route and Stop Management</Text>
+    <View style={{ flex: 1, backgroundColor: "white" }}>
+      <View style={styles.topContainer}>
+        <View
+          style={{
+            marginHorizontal: 22,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <View style={{ marginVertical: 62 }}>
+            <Text
+              style={{
+                fontSize: 20,
+                color: "#2d2d2d",
+                fontWeight: "bold",
+              }}
+            >Route and Stop Management</Text>
+            <View>
+              <Skeleton width={45} radius="round" colorMode="light" height={45} />
+            </View>
+          </View>
+        </View>
+      </View>
 
       <View style={styles.routeContainer}>
         <Text style={styles.label}>Routes:</Text>
@@ -107,10 +139,9 @@ export default function RoutesScreen() {
       </View>
 
       <View style={styles.stopContainer}>
-        <Text style={styles.label}>Here is the continuation of the code for the Route and Stop Management screen in your React Native app:
-
-```javascript
-        Stops:</Text>
+        <Text style={styles.label}>
+          Stops:
+        </Text>
         <FlatList
           data={stops}
           keyExtractor={(item) => item.id.toString()}
@@ -133,67 +164,145 @@ export default function RoutesScreen() {
           </TouchableOpacity>
         </View>
       </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Schedule navigation={navigation} />
+        <Schedule />
+      </ScrollView>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 20,
-    paddingTop: 20,
-    backgroundColor: '#FFFFFF',
-  },
-  heading: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+  topContainer: {
+    backgroundColor: "#e0e0e0",
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 25,
+    paddingBottom: 20,
   },
   routeContainer: {
-    marginBottom: 20,
+    marginHorizontal: 16,
+    marginTop: 20,
+    flex: 1,
   },
-  routeItem: {
-    paddingVertical: 10,
-  },
-  routeName: {
-    fontSize: 16,
+  stopContainer: {
+    marginHorizontal: 16,
+    marginTop: 20,
+    flex: 1,
   },
   addRouteContainer: {
     flexDirection: 'row',
+    marginTop: 10,
     alignItems: 'center',
-  },
-  stopContainer: {
-    marginBottom: 20,
-  },
-  stopItem: {
-    paddingVertical: 10,
-  },
-  stopName: {
-    fontSize: 16,
   },
   addStopContainer: {
     flexDirection: 'row',
+    marginTop: 10,
     alignItems: 'center',
+  },
+  label: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
   },
   input: {
     flex: 1,
     height: 40,
+    marginRight: 10,
     borderWidth: 1,
-    borderColor: '#CCCCCC',
-    borderRadius: 5,
+    borderColor: 'gray',
+    borderRadius: 4,
     paddingHorizontal: 10,
   },
   addButton: {
-    marginLeft: 10,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    backgroundColor: '#FECF67',
-    borderRadius: 5,
+    backgroundColor: '#1e90ff',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 4,
   },
   buttonText: {
-    fontSize: 14,
+    color: 'white',
     fontWeight: 'bold',
-    color: '#FFFFFF',
+    textAlign: 'center',
+  },
+  routeItem: {
+    backgroundColor: '#f0f0f0',
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 4,
+  },
+  routeName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  stopItem: {
+    backgroundColor: '#f0f0f0',
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 4,
+  },
+  stopName: {
+    fontSize: 16,
   },
 });
+
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     paddingHorizontal: 20,
+//     paddingTop: 20,
+//     backgroundColor: '#FFFFFF',
+//   },
+//   heading: {
+//     fontSize: 24,
+//     fontWeight: 'bold',
+//     marginBottom: 20,
+//   },
+//   routeContainer: {
+//     marginBottom: 20,
+//   },
+//   routeItem: {
+//     paddingVertical: 10,
+//   },
+//   routeName: {
+//     fontSize: 16,
+//   },
+//   addRouteContainer: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//   },
+//   stopContainer: {
+//     marginBottom: 20,
+//   },
+//   stopItem: {
+//     paddingVertical: 10,
+//   },
+//   stopName: {
+//     fontSize: 16,
+//   },
+//   addStopContainer: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//   },
+//   input: {
+//     flex: 1,
+//     height: 40,
+//     borderWidth: 1,
+//     borderColor: '#CCCCCC',
+//     borderRadius: 5,
+//     paddingHorizontal: 10,
+//   },
+//   addButton: {
+//     marginLeft: 10,
+//     paddingHorizontal: 12,
+//     paddingVertical: 8,
+//     backgroundColor: '#FECF67',
+//     borderRadius: 5,
+//   },
+//   buttonText: {
+//     fontSize: 14,
+//     fontWeight: 'bold',
+//     color: '#FFFFFF',
+//   },
+// });
 

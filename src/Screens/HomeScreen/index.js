@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 export default function HomeScreen({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.Reducers.user);
-  console.log(user);
+
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <View style={styles.topContainer}>
@@ -47,7 +47,7 @@ export default function HomeScreen({ navigation }) {
               <Text
                 style={{ fontWeight: "bold", fontSize: 17, color: "#2d2d2d" }}
               >
-                {user.name}
+                {user[0].name}
               </Text>
             </Pressable>
           </View>

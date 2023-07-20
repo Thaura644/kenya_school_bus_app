@@ -64,6 +64,7 @@ const SignupScreen = ({ navigation }) => {
       style={{ backgroundColor: "white" }}
       showsVerticalScrollIndicator={false}
     >
+    
       <View style={{ marginHorizontal: 22 }}>
         <View style={{ alignItems: "center" }}>
           <Image
@@ -403,7 +404,8 @@ const SignupScreen = ({ navigation }) => {
             </Text>
           </Pressable>
         </View>
-      </View>
+      
+  
     </ScrollView>
   );
 };

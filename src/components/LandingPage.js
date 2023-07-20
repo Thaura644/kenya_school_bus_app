@@ -5,12 +5,12 @@ const LandingPage = () => {
   return (
     
     <ImageBackground
-      source={require('./assets/bus.jpg')}
+      source={require('../../assets/bus.jpg')}
       style={styles.backgroundImage}
     >
       <View style={styles.container}>
 
-      <Image source = {require('./assets/logo1.png')}
+      <Image source = {require('../../assets/logo1.png')}
         style={{ width: 150, height: 30, marginRight: 50, marginTop: 40}}
         />
          <View style={styles.navbar}>

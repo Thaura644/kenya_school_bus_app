@@ -36,12 +36,12 @@ export default function App() {
     }
     return (
       <NavigationContainer>
+
          {token === null || user.length === 0 ? ( //checks to see if the user is logged in
           <AuthNavigator />
         ) : (
           <Tabnavigator />
         )}
-
 
       </NavigationContainer>
     );

@@ -1,29 +1,36 @@
 const initialState = {
-  authToken: null,
-  loader: false,
-  user: [],
+  authToken: null, // Stores the user's authentication token
+  loader: false,   // Loading state
+  user: {},        // User details
+  schools: [],     // List of schools
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case "LOGIN":
       return {
-        ...state, //copy all previous states
-        authToken: action.payload,
-      };
-    case "LOADER":
-      return {
-        ...state, //copy all previous states
-        loader: action.payload,
+        ...state,
+        authToken: action.payload, // Store token in state
       };
     case "USER":
       return {
-        ...state, //copy all previous states
-        user: action.payload,
+        ...state,
+        user: action.payload, // Update user details
+      };
+    case "SCHOOLS":
+      return {
+        ...state,
+        schools: action.payload, // Update schools list
+      };
+    case "LOADER":
+      return {
+        ...state,
+        loader: action.payload, // Toggle loader state
       };
     case "LOGOUT":
       return {
-        authToken: null,
+        ...initialState, // Reset state on logout
+        schools: state.schools, // Persist schools
       };
     default:
       return state;

@@ -40,7 +40,7 @@ export default function HomeScreen({ navigation }) {
               }}
             >
               Welome Aboard,
-            </Text>
+              </Text>
             <Pressable
               onPress={() => {
                 dispatch({
@@ -51,7 +51,7 @@ export default function HomeScreen({ navigation }) {
               <Text
                 style={{ fontWeight: "bold", fontSize: 17, color: "#2d2d2d" }}
               >
-                {user[0]?.fullname}
+                {user.fullname}
               </Text>
             </Pressable>
           </View>

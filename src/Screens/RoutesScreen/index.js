@@ -24,7 +24,7 @@ export default function RoutesScreen({ navigation }) {
   const fetchRoutes = async () => {
     try {
       // Make an API call to fetch routes
-      const response = await fetch('https://3bd0-41-89-99-5.ngrok-free.app/api/get_route/');
+      const response = await fetch('http://94.72.116.185:8000/get_route/');
       const data = await response.json();
       setRoutes(data);
     } catch (error) {
@@ -36,7 +36,7 @@ export default function RoutesScreen({ navigation }) {
   const addRoute = async () => {
     try {
       // Make an API call to create a new route
-      const response = await fetch('https://3bd0-41-89-99-5.ngrok-free.app/api/get_route/', {
+      const response = await fetch('http://94.72.116.185:8000/create_route/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ export default function RoutesScreen({ navigation }) {
   const fetchStops = async (routeId) => {
     try {
       // Make an API call to fetch stops for a specific route
-      const response = await fetch(`https://3bd0-41-89-99-5.ngrok-free.app/api/get_route/${routeId}`);
+      const response = await fetch(`http://94.72.116.185:8000/${stop_id}`);
       const data = await response.json();
       setStops(data);
       setSelectedRouteId(routeId);
@@ -68,7 +68,7 @@ export default function RoutesScreen({ navigation }) {
   const addStop = async (routeId) => {
     try {
       // Make an API call to create a new stop for a specific route
-      const response = await fetch(`https://3bd0-41-89-99-5.ngrok-free.app/api/get_route/${routeId}`, {
+      const response = await fetch(`http://94.72.116.185:8000/${routeId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

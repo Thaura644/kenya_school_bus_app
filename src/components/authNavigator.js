@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import LoginScreen from "../Screens/LoginScreen";
 import SignupScreen from "../SignUp";
+import SchoolSelectionScreen from "../Screens/SchoolSelectionScreen";
 const Stack = createStackNavigator();
 export default function AuthNavigator() {
   return (
@@ -15,6 +16,7 @@ export default function AuthNavigator() {
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
 
       <Stack.Screen name="SignupScreen" component={SignupScreen} />
+      <Stack.Screen name="SchoolSelectionScreen" component={SchoolSelectionScreen}/>
     </Stack.Navigator>
   );
 }

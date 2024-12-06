@@ -48,7 +48,7 @@ const UserProfile = () => {
   return (
     <View style={styles.container}>
       <ProfilePicture source={user.profilePicture} />
-      <Text style={styles.name}>{user.name}</Text>
+      <Text style={styles.name}>{user?.fullname}</Text>
       <ProfileField label="Email" value={user.email} />
       <SectionTitle title="User Permissions" />
       <UserPermissions permissions={user.permissions} />

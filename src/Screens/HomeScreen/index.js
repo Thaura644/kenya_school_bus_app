@@ -12,9 +12,13 @@ import TodaysSchedule from "../../components/TodaysSchedule";
 import Schedule from "../../components/Schedule";
 import { Skeleton } from "moti/skeleton";
 import { useDispatch, useSelector } from "react-redux";
+import { useRoute } from "@react-navigation/native";
 export default function HomeScreen({ navigation }) {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.Reducers.user);
+  const user = useSelector((state) => state.Reducers.user || {});
+  const route = useRoute();
+  const fullname = user?.fullname || "Guest";
+  // const { fullname, email } = route.params;
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -47,7 +51,7 @@ export default function HomeScreen({ navigation }) {
               <Text
                 style={{ fontWeight: "bold", fontSize: 17, color: "#2d2d2d" }}
               >
-                {user[0].name}
+                {user[0]?.fullname}
               </Text>
             </Pressable>
           </View>

@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 const StudentsScreen = () => {
   const route = useRoute();
-  const { fullname, email, school } = route.params;
-
+  
+  const user = useSelector((state) => state.Reducers.user || {});
+  const { email } = useSelector((state) => state.Reducers.user || {});
+  const { school } = useSelector((state) => state.Reducers.user || {});
+ 
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
@@ -13,16 +17,16 @@ const StudentsScreen = () => {
           // source={require("../../assets/icons8-circled-profile-64.png")}
           style={styles.profileImage}
         />
-        <Text style={styles.fullname}>{fullname}</Text>
-        <Text style={styles.email}>{email}</Text>
-        <Text style={styles.school}>{school}</Text>
+        <Text style={styles.fullname}>{user?.fullname}</Text>
+        <Text style={styles.email}>{user?.email}</Text>
+        <Text style={styles.school}>{user?.school}</Text>
       </View>
 
       <View style={styles.sectionContainer}>
         <Text style={styles.sectionTitle}>Personal Information</Text>
         <View style={styles.infoRow}>
           <Text style={styles.infoLabel}>Full Name:</Text>
-          <Text style={styles.infoValue}>{fullname}</Text>
+          <Text style={styles.infoValue}>{user?.fullname}</Text>
         </View>
         <View style={styles.infoRow}>
           <Text style={styles.infoLabel}>Email:</Text>

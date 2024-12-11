@@ -17,7 +17,7 @@ export default function HomeScreen({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.Reducers.user || {});
   const route = useRoute();
-  const fullname = user?.fullname || "Guest";
+  const fullname = user.fullname || "Guest";
   // const { fullname, email } = route.params;
 
   return (

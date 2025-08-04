@@ -168,4 +168,24 @@ The **Kenya School Bus App** is an efficient school bus management solution desi
 
 ---
 
+## **Set-up**
+ 1. **Install**
+    *navigate to the parent directory, i.e where package.json lives*
+    ```npm install``` or ```npm -i```
+    *if successful move to part 2*
+    *otherwise, do:*
+    ```npm install --force``` or ```npm install --legacy-deps``` *verify the second command if it's correct*
+    *if still not succesfull, do*
+    *delete ```node_modules``` and ```package-lock.json```*
+    *and do the first step in the section*
+2. **Pilot test**
+   *prerequisites*
+   *-install on your phone expo apk for version 50 or less*
+   *be ready to downgrade or upgrade depending on the required version while running the app*
+   *run with the following command*
+   ```npx expo start```
+    *or the second time*
+   ```npx expo start --clear-cache``` *whatever works*
+   
+   
 For any further assistance or queries, please contact the development team at **support@odoo.co.ke**.

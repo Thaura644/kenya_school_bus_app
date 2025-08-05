@@ -12,7 +12,9 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Skeleton } from "moti/skeleton";
-export default function Schedule({ navigation }) {
+import { router } from "expo-router";
+
+export default function Schedule() {
   const [location, setLocation] = useState("Town East, West Rd, Nakuru");
   var matches = location.match(/\b(\w)/g);
   var first = matches.join("");
@@ -23,7 +25,7 @@ export default function Schedule({ navigation }) {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate("ScheduledRoutesScreen");
+        router.push("/(app)/schedule");
       }}
       style={styles.container}
     >

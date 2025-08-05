@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { StackActions } from "@react-navigation/native";
+import { router } from "expo-router";
 import {
   View,
   Text,
@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { SignUp } from "../store/actions"; // Import the SignUp action
 
-const SignupScreen = ({ navigation }) => {
+const SignupScreen = () => {
   const [email, setEmail] = useState("");
   const [fullname, setFullname] = useState("");
   const [password, setPassword] = useState("");
@@ -35,7 +35,7 @@ const SignupScreen = ({ navigation }) => {
     }
     try {
       await dispatch(SignUp(email, fullname, password));
-      navigation.dispatch(StackActions.replace("StudentsScreen", { fullname }));
+      router.replace("/(app)");
     } catch (err) {
       setError("Signup failed. Please try again.");
       console.error("Error signing up:", err);
@@ -95,7 +95,7 @@ const SignupScreen = ({ navigation }) => {
         </TouchableOpacity>
         <View style={styles.loginRedirect}>
           <Text style={styles.loginText}>Already have an account?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
+          <TouchableOpacity onPress={() => router.push("/(auth)/login")}>
             <Text style={styles.link}>Login</Text>
           </TouchableOpacity>
         </View>

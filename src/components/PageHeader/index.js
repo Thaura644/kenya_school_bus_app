@@ -1,8 +1,8 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { router } from "expo-router";
+
 export default function PageHeader({ props }) {
-  const nav = useNavigation();
   return (
     <View style={style.header}>
       <View
@@ -19,7 +19,7 @@ export default function PageHeader({ props }) {
       >
         <TouchableOpacity
           onPress={() => {
-            nav.goBack();
+            router.back();
           }}
         >
           <Image

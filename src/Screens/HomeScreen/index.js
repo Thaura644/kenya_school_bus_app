@@ -12,13 +12,14 @@ import TodaysSchedule from "../../components/TodaysSchedule";
 import Schedule from "../../components/Schedule";
 import { Skeleton } from "moti/skeleton";
 import { useDispatch, useSelector } from "react-redux";
-import { useRoute } from "@react-navigation/native";
-export default function HomeScreen({ navigation }) {
+import { useLocalSearchParams } from "expo-router";
+
+export default function HomeScreen() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.Reducers.user || {});
-  const route = useRoute();
+  const params = useLocalSearchParams();
   const fullname = user.fullname || "Guest";
-  // const { fullname, email } = route.params;
+  // const { fullname, email } = params;
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -64,7 +65,7 @@ export default function HomeScreen({ navigation }) {
 
       <TodaysSchedule />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Schedule navigation={navigation} />
+        <Schedule />
         <Schedule />
       </ScrollView>
     </View>

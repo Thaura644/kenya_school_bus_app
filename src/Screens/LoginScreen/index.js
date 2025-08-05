@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { StackActions } from "@react-navigation/native";
+import { router } from "expo-router";
 import {
   View,
   Text,
@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { Login } from "../../store/actions";
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordShown, setPasswordShow] = useState(true);
@@ -33,7 +33,7 @@ const LoginScreen = ({ navigation }) => {
     }
     try {
       await dispatch(Login(email, password));
-      navigation.dispatch(StackActions.replace("StudentsScreen"));
+      router.replace("/(app)");
     } catch (err) {
       setError("Login failed. Please check your credentials.");
       console.error("Login error:", err);
@@ -88,7 +88,7 @@ const LoginScreen = ({ navigation }) => {
 
         <View style={styles.signupRedirect}>
           <Text style={styles.signupText}>Don't have an account?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("SignupScreen")}>
+          <TouchableOpacity onPress={() => router.push("/(auth)/signup")}>
             <Text style={styles.link}>Sign Up</Text>
           </TouchableOpacity>
         </View>

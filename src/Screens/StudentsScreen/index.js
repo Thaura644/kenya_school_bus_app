@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { useLocalSearchParams } from 'expo-router';
 import { useSelector } from 'react-redux';
 
 const StudentsScreen = () => {
-  const route = useRoute();
+  const params = useLocalSearchParams();
   
   const user = useSelector((state) => state.Reducers.user || {});
   const { email } = useSelector((state) => state.Reducers.user || {});
